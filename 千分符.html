@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+         //千分符
+        //方法一
+        var str = "13234567890";
+        //分析：正则分为两部分；第一部分：数字有一位，2位，或3位；
+        //                      第二部分：位数一定是3的倍数
+        var reg = /^(\d{1,3})((\d{3})+)$/;
+        var newStr =  str.replace(reg,function () {
+            // console.log(arguments);
+            var part1 = arguments[1];
+            var part2 = arguments[2];
+            var newStr = part2.replace(/\d{3}/g,function () {
+                console.log(arguments);
+                return "," + arguments[0];
+            })
+            return part1 + newStr;
+        })
+        console.log(newStr);
+
+        // 方法二
+       /*  var  newStr = str.replace(/\d/g,function () {
+       // arguments:["",0]
+       // 当捕获到当前这一项，要不要加逗号，取决于这一项后面的字符串的长度；如果后面的字符串长度是3的倍数；那么该项需要逗号；
+       // 如何计算当前项后面项所有字符的长度；字符串总长度-(当前项索引+1)
+       // 后面的长度%3===0那么该项应该拼接逗号；
+       // 并且要求不是最后一项；
+       if((str.length-(arguments[1]+1))%3===0&&str.length-1!==arguments[1]){
+           return arguments[0]+","
+       }else{
+           return arguments[0]
+       }
+    })
+    console.log(newStr); */
+   
+        
+        
+        
+    </script>
+</body>
+</html>
